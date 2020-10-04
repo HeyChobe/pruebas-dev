@@ -72,13 +72,32 @@ const getDiscoverPokemon = (action) => {
 }
 
 /**
- * Muestra la sección Discover
+ * Dada la data de un pokemon la mapea a un objeto pokemon más simple
+ * @param {object} Data data de un pokemon en formato API
  */
-const showDiscover = () => {
-    const pokemon = [];
+const createPokemon = (data) => {
+    return{
+        main: data.species.name,
+        img: data.sprites.front_default,
+        description: "This pokemon has the types: " +
+        data.types.reduce((typesText,current) => {
+            return (typesText == "" ? "" : typesText + ",") + current.type.name;
+        },""),
+    }
+}
+
+/**
+ * Muestra la sección Discover como una lista de cartas
+ * Obtiene los elementos a mostrar desde data.discover
+ */
+const showDiscover = async () => {
+    const pokemons = [];
     data.discover.results.forEach(pokemonMetaData => {
-        console.log(pokemonMetaData.url);
+        const response = await fetch(pokemonMetaData.url);
+        const data = response.json();
+        pokemon.push(createPokemonCard(data));
     });
+    showListAsCard(pokemons, document.querySelector('.discover-result'));
 }
 
 /**
