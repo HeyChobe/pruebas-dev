@@ -2,7 +2,11 @@
 let basePokeApi = 'https://pokeapi.co/api/v2/';
 
 //Data del usuario
-let data = {};
+let data = {
+    //Número aleatorio desde 1 hasta 1050
+    offset: Math.floor(Math.random()*1050) + 1,
+    limit: 4,
+};
 
 /**
  * Creará la estructura HTML de una card para mostrar la información de un pokemon
@@ -52,20 +56,42 @@ const showListAsCard = (list,target) => {
 }
 
 /**
+ * Obtiene una lista de pokemons a mostrar
+ * @param {function} action callback cuando la función termine de obtener los datos 
+ */
+const getDiscoverPokemon = (action) => {
+    const endPoint = basePokeApi+`pokemon?limit=${data.limit}&offset=${data.offset}`;
+    fetch(endPoint)
+    .then(response => response.json())
+    .then(data => {
+        action(data);
+    })
+    .catch(error => {
+        console.log('Error obtenido de la lista de Pokemons para discover',error);
+    });
+}
+
+/**
+ * Muestra la sección Discover
+ */
+const showDiscover = () => {
+    const pokemon = [];
+    data.discover.results.forEach(pokemonMetaData => {
+        console.log(pokemonMetaData.url);
+    });
+}
+
+/**
  * Configura todo lo necesario para que la App funcione
  */
 const App = () => {
     console.log('Start App');
-    const pokemons = Array(4)
-    .fill({})
-    .map((element, index) => {
-        return{
-            name: `Pokemon ${index}`, 
-            img: "./img/default_pokebola.png",
-            description: "Lorem ipsum dolor sit amet consectetur"
-        };
+    //Obteniendo la data discover
+    getDiscoverPokemon(discover => {
+        data.discover = discover;
+        showDiscover();
     });
-    showListAsCard(pokemons, document.querySelector('.discover-result'));
+    // showListAsCard(pokemons, document.querySelector('.discover-result'));
 };
 
 //Cuando la ventana se cargue, no importa donde se ponga el script, funcionará
