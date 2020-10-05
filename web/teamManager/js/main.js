@@ -153,6 +153,13 @@ const previousDiscoverListener = () => {
     });
 };
 
+/**
+ * Lee las llamadas de FAV y TEAM 
+ * Identifica si se debe eliminar el pokemon del arreglo o agregarlo
+ * @param {element} target elemento al que se le da click
+ * @param {array} list arreglo que contiene los pokemons
+ * @param {event} after evento a realizar
+ */
 const listToggle = (target, list, after) => {
   const pokemonToAddOrRemove = JSON.parse(target.dataset.pokemon);
   const index = list.findIndex(
@@ -169,6 +176,9 @@ const listToggle = (target, list, after) => {
   if (after) after(pokemonToAddOrRemove);
 };
 
+/**
+ * Permite agregar pokemons a la sección de FAV
+ */
 const favListener = () => {
   document.addEventListener("click", (e) => {
     //Delegación de un evento
@@ -192,6 +202,10 @@ const favListener = () => {
   });
 };
 
+
+/**
+ * Permite agregar pokemons a la sección de TEAM
+ */
 const teamListener = () => {
   document.addEventListener("click", (e) => {
     //Delegación de un evento
@@ -215,6 +229,11 @@ const teamListener = () => {
   });
 };
 
+
+/**
+ * Lee el valor de búsqueda y lo muestra en la sección de búsqueda
+ * También permite cerrar esta sección
+ */
 const searchListener = () => {
     let searchPanel = document.querySelector("#search");
     document.forms.search.addEventListener('submit', e => {
