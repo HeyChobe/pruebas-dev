@@ -77,7 +77,7 @@ const getDiscoverPokemon = (action) => {
  */
 const createPokemon = (data) => {
     return{
-        main: data.species.name,
+        name: data.species.name.toUpperCase(),
         img: data.sprites.front_default,
         description: "This pokemon has the types: " +
         data.types.reduce((typesText,current) => {
@@ -91,12 +91,13 @@ const createPokemon = (data) => {
  * Obtiene los elementos a mostrar desde data.discover
  */
 const showDiscover = async () => {
-    const pokemons = [];
-    data.discover.results.forEach(pokemonMetaData => {
+    let pokemons = [];
+    for (const pokemonMetaData of data.discover.results){
         const response = await fetch(pokemonMetaData.url);
-        const data = response.json();
-        pokemon.push(createPokemonCard(data));
-    });
+        const data = await response.json();
+        let pokemon = createPokemon(data);
+        pokemons.push(pokemon);
+    };
     showListAsCard(pokemons, document.querySelector('.discover-result'));
 }
 
