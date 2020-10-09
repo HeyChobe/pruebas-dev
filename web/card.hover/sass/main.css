@@ -1,0 +1,250 @@
+:root {
+  --transition-duration: 0.2s;
+  --transition-delay: 0.2s;
+}
+
+.card {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 20%;
+  min-width: 220px;
+  height: 50vh;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #fddb3a;
+  width: 100%;
+  height: 55%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-header .card-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 7px;
+}
+
+.card-header .card-icon i {
+  height: 100%;
+  padding-right: 5%;
+  font-size: 1.35em;
+  color: #52575d;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.card-header img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 70%;
+  opacity: 0.5;
+  margin-bottom: 50px;
+}
+
+.card-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #52575d;
+  width: 100%;
+  height: 45%;
+  color: white;
+}
+
+.card-content-header {
+  width: 100%;
+  height: 40%;
+}
+
+.card-content-header h3 {
+  padding-left: 10%;
+  padding-top: 4%;
+  margin: 0;
+  font-size: 1.4em;
+  font-family: "Open sans", "sans-serif";
+  font-weight: 400;
+}
+
+.card-content-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 60%;
+  padding-bottom: 3%;
+}
+
+.card-content-info h4 {
+  margin-bottom: 5px;
+  width: 80%;
+  padding-left: 10%;
+  font-family: "Open sans", "sans-serif";
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.card-content-info h4 i {
+  padding-right: 5%;
+}
+
+.card a {
+  position: relative;
+  display: block;
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  cursor: unset;
+  margin: 0;
+  padding: 0;
+}
+
+.card .border {
+  position: absolute;
+  left: 0;
+  background: red;
+}
+
+.card .border-top,
+.card .border-bottom {
+  width: 100%;
+  height: 3px;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+}
+
+.card .border-left,
+.card .border-right {
+  width: 3px;
+  height: 100%;
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+}
+
+.card .border-top,
+.card .border-left,
+.card .border-right {
+  top: 0;
+}
+
+.card .border-bottom {
+  bottom: 0;
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.card .border-top {
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.card .border-left {
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.card .border-right {
+  left: auto;
+  right: 0;
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.card .border {
+  -webkit-transition: -webkit-transform var(--transition-duration) ease-in-out;
+  transition: -webkit-transform var(--transition-duration) ease-in-out;
+  transition: transform var(--transition-duration) ease-in-out;
+  transition: transform var(--transition-duration) ease-in-out, -webkit-transform var(--transition-duration) ease-in-out;
+}
+
+.card a:hover .border-top,
+.card a:hover .border-bottom {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.card a:hover .border-left,
+.card a:hover .border-right {
+  -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+
+.card a:hover .border-right {
+  -webkit-transition-delay: var(--transition-delay);
+          transition-delay: var(--transition-delay);
+}
+
+.card a:hover .border-bottom {
+  -webkit-transition-delay: calc(var(--transition-delay) * 2);
+          transition-delay: calc(var(--transition-delay) * 2);
+}
+
+.card a:hover .border-left {
+  -webkit-transition-delay: calc(var(--transition-delay) * 3);
+          transition-delay: calc(var(--transition-delay) * 3);
+}
+
+.card[data-animation="diagonal"] .border-left {
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.card[data-animation="diagonal"] .border-right,
+.card[data-animation="diagonal"] .border-bottom {
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.card[data-animation="diagonal"] a:hover [class^=border] {
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+}
+/*# sourceMappingURL=main.css.map */
