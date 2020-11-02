@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-function Card() {
+function Card({task, onDelete}) {
     return (
         <div>
-            <h3>Título</h3>
-            <button>x</button>
+            <h3>{task.title}</h3>
+            <button onClick={() => onDelete(task.id)}>x</button> 
+            {/* <button onClick={onDelete(task.id)}>x</button> */}
         </div>
     );
 }

@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import List from "./../list";
 import "./App.css";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      title:'',
+      title: "",
+      tasks: [],
+      id: 0,
     };
     // Esta instrucción debería ir por cada método (función) creada si no es arrow
     //this.onChange = this.onChange.bind(this);
@@ -16,29 +18,46 @@ class App extends Component {
     console.log(e);
     const value = e.target.value;
     this.setState({
-      title:value,
+      title: value,
     });
-  } 
+  };
 
-  render () {
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { title, tasks, id } = this.state;
+    const newTask = {
+      id,
+      title,
+    };
+
+    this.setState({
+      tasks: [...tasks, newTask],
+      title: "",
+      id: id + 1,
+    });
+  };
+
+  onDelete = (id) => {
+    const newTasks = this.state.tasks.filter((task) => task.id !== id);
+
+    this.setState({
+      tasks: newTasks,
+    });
+  };
+
+  render() {
     return (
       <div>
-        <form>
-          <dl>
-            <dt>
-              <label htmlFor='title'>Título</label>
-            </dt>
-            <dt>
-              <input id='title' value={this.state.title} onChange={this.onChange}/>
-            </dt>
-          </dl>
+        <form onSubmit={this.onSubmit}>
+          <label htmlFor='title'>Título</label>
+          <input id='title' value={this.state.title} onChange={this.onChange} />
           <button type='submit'>Agregar</button>
         </form>
-        <List />
+        <List tasks={this.state.tasks} onDelete={this.onDelete} />
       </div>
     );
   }
-
 }
 
 export default App;
