@@ -1,63 +1,50 @@
-import React, { Component } from "react";
+import React, { useState } from "react"; //Usando hooks
 import List from "./../list";
 import "./App.css";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "",
-      tasks: [],
-      id: 0,
-    };
-    // Esta instrucción debería ir por cada método (función) creada si no es arrow
-    //this.onChange = this.onChange.bind(this);
-  }
+function App() {
 
-  onChange = (e) => {
-    console.log(e);
+  //Los Hooks me sirven como "estados" pero dentro de funciones
+  //Debo crear uno por cada elemento del estado que necesito
+  //const [valor, función_para_modificar_valor] = useState(valor_defecto)
+
+  const [title, setTitle] = useState("");
+  const [id, setId] = useState(0);
+  const [tasks, setTasks] = useState([]);
+  
+  const onChange = (e) => {
     const value = e.target.value;
-    this.setState({
-      title: value,
-    });
+    setTitle(value);
   };
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, tasks, id } = this.state;
     const newTask = {
       id,
       title,
     };
 
-    this.setState({
-      tasks: [...tasks, newTask],
-      title: "",
-      id: id + 1,
-    });
+    setTasks([...tasks, newTask]);
+    setTitle("");
+    setId(id+1);
   };
 
-  onDelete = (id) => {
-    const newTasks = this.state.tasks.filter((task) => task.id !== id);
-
-    this.setState({
-      tasks: newTasks,
-    });
+   const onDelete = (id) => {
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
   };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <label htmlFor='title'>Título</label>
-          <input id='title' value={this.state.title} onChange={this.onChange} />
-          <button type='submit'>Agregar</button>
-        </form>
-        <List tasks={this.state.tasks} onDelete={this.onDelete} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
+        <label htmlFor='title'>Título</label> 
+        <input id='title' value={title} onChange={onChange} />
+        <button type='submit'>Agregar</button>
+      </form>
+      <List tasks={tasks} onDelete={onDelete} />
+    </div>
+  );
 }
 
 export default App;
