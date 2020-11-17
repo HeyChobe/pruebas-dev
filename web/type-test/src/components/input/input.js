@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const text = "Carlos Roberto Cortez Iraheta";
+const text = "la vaca lola, tiene cabeza y tiene cola";
 
 const InputWrapper = styled.div`
   position: relative;
